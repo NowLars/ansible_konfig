@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install httpd/apache package
+    yum:
+      name: httpd
+      state: absent
