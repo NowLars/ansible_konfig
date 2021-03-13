@@ -1,0 +1,42 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install updates (OracleLinux)
+    yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "OracleLinux"
+
+  - name: install updates (Ubuntu)
+    apt:
+      name: '*'
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+
+  - name: install httpd/apache and php package for OracleLinux
+    yum:
+      name: 
+        - httpd
+        - php
+      state: latest
+    when: ansible_distribution == "OracleLinux"
+
+  - name: install httpd/apache and php package for Ubuntu
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu"
