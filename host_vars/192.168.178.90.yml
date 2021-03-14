@@ -1,0 +1,2 @@
+ssh_users: "root AnsibleAuto"
+ssh_template_file: sshd_config_OracleLinux.j2
