@@ -1,0 +1,47 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (OracleLinux)
+    tags: always
+    yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "OracleLinux"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      name: '*'
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: all
+  tasks:
+    
+  - name: create AnsibleAuto user
+    tags: always
+    user:
+      name: AnsibleAuto
+      groups: root
+
+  - name: add ssh key for AnsibleAuto
+    tags: always
+    authorized_key:
+      user: AnsibleAuto
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINMLIk0ZcdnnWI9IQzK6yx6ThTxz1FIRhonIHu5EmyDj Ansible"
+   
+  - name: add sudoers file for AnsibleAuto
+    tags: always
+    copy:
+      src: sudoer_AnsibleAuto
+      dest: /etc/sudoers.d/AnsibleAuto
+      owner: root
+      group: root
+      mode: 0440
+      

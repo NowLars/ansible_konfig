@@ -4,21 +4,19 @@
   become: true
   pre_tasks:
 
-  - name: install updates (OracleLinux)
+  - name: Update Reop (OracleLinux)
     tags: always
     yum:
-      name: '*'
-      state: latest
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "OracleLinux"
 
-  - name: install updates (Ubuntu)
+  - name: Update Repo (Ubuntu)
     tags: always
     apt:
-      name: '*'
-      state: latest
       update_cache: yes
-    when: ansible_distribution == "Ubuntu"
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"  
 
 - hosts: workstations
   become: true
