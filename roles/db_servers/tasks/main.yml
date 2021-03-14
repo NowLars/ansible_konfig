@@ -1,0 +1,13 @@
+- name: install mariadb package (OracleLinux)
+  tags: OracleLinux, mariadb, db
+  yum: 
+    name: mariadb
+    state: latest
+  when: ansible_distribution == "OracleLinux"
+ 
+- name: install mariadb package (Ubuntu)
+  tags: Ubuntu, mariadb, db
+  apt:
+    name: mariadb-server
+    state: latest
+  when: ansible_distribution == "Ubuntu"

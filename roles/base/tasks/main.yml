@@ -1,0 +1,5 @@
+- name: add ssh key for AnsibleAuto
+  authorized_key:
+    user: AnsibleAuto
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINMLIk0ZcdnnWI9IQzK6yx6ThTxz1FIRhonIHu5EmyDj Ansible"
+
